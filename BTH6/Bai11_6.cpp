@@ -2,35 +2,25 @@
 
 using namespace std;
 
-int palindrome(long long n){
-    long long tmp = 0;
-    while (n > 0){
-        tmp = tmp*10 + n%10;
-        n /= 10;
-    }
-
-    while (tmp > 0){
-        n = n*10 + tmp%10;
-        tmp /= 10;
-    }
-    return n;
+int doixung(int n) {
+	int tmp = n;
+	int res = 0;
+	while (n) {
+		res = res * 10 + n % 10;
+		n /= 10;
+	}
+	return res == tmp;
 }
-
-int main(){
-    int n;
-    cin >> n;
-        long long tmp = 0;
-    while (n > 0){
-        tmp = tmp*10 + n%10;
-        n /= 10;
-    }
-
-    int tmp1 = tmp;
-    cout << tmp1 << endl;
-
-    while (tmp > 0){
-        tmp1 = tmp1*10 + tmp%10;
-        tmp /= 10;
-    }
-    cout << tmp1;
+int main() {
+	int n; cin >> n;
+	int a[1000];
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+	for (int it : a) {
+		if (doixung(it)) cout << it <<" ";
+	}
+	cout << endl;
+	system("pause");
+	return 0;
 }
