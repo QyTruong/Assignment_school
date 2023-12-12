@@ -16,11 +16,13 @@ long order_min(int arr[], int size){
 
 int main(){
 	int n;
-	
-		cout << "Nhap so phan tu: ";
-		cin >> n;
-		
-	
+	do {
+	    cout << "Nhap so phan tu cho mang: ";
+	    cin >> n;
+	    if (n <= 0){
+	        cout << "Vui long nhap lai!" << endl;
+	    } 
+    	} while (n <= 0);
 	int a[n];
 	for (int i = 0; i < n; i++){
 		cin >> a[i];
