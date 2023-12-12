@@ -19,7 +19,7 @@ int main(){
         cout << "Nhap so phan tu cho mang: ";
         cin >> n;
         if (n <= 0){
-            cout << "Vui long nhap lai!" << endll;
+            cout << "Vui long nhap lai!" << endl;
     } while (n <= 0);
     cout << "Nhap so ma ban muon biet: ";
     cin >> x;
