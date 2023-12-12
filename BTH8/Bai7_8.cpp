@@ -25,7 +25,8 @@ int main(){
     	} while (n <= 0);
 	int a[n];
 	for (int i = 0; i < n; i++){
-		cin >> a[i];
+	     cout << "Vi tri thu " << i << " trong mang: ";
+	     cin >> a[i];
 	}
 	int kq = order_min(a,n);
 	cout << "Phan tu nho nhat xuat hien dau tien trong mang nam o vi tri thu: " << kq;
