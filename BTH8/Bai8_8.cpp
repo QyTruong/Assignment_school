@@ -15,8 +15,12 @@ int times(int a[], int n, int x){
 
 int main(){
     int n,x;
-    cout << "Nhap so phan tu cho mang: ";
-    cin >> n;
+    do {
+        cout << "Nhap so phan tu cho mang: ";
+        cin >> n;
+        if (n <= 0){
+            cout << "Vui long nhap lai!" << endll;
+    } while (n <= 0);
     cout << "Nhap so ma ban muon biet: ";
     cin >> x;
     int a[n];
