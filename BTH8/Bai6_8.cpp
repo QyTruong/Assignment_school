@@ -5,7 +5,7 @@ using namespace std;
 // Nhập các giá trị vào mảng
 void nhap(int arr[], int arrSize){
     for (int i = 0; i < arrSize; i++){
-        cout << "Nhap phan tu thu" << i+1 << ": ";
+        cout << "Nhap phan tu thu " << i+1 << ": ";
         cin >> arr[i];
     }
 }
