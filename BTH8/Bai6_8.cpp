@@ -5,6 +5,7 @@ using namespace std;
 // Nhập các giá trị vào mảng
 void nhap(int arr[], int arrSize){
     for (int i = 0; i < arrSize; i++){
+        cout << "Nhap phan tu thu" << i+1 << ": ";
         cin >> arr[i];
     }
 }
@@ -55,8 +56,15 @@ void xoa(int arr[], int& arrSize, int p){
 }
 
 int main(){
-    int n, x, s;
-    cin >> n;
+    int x,s;
+    int n;
+    do {
+	    cout << "Nhap so phan tu cho mang: ";
+	    cin >> n;
+	    if (n <= 0){
+	        cout << "Vui long nhap lai!" << endl;
+	    } 
+    } while (n <= 0);
     int a[n];
     nhap(a,n);
     daonguoc(a,n); 
