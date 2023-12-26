@@ -8,8 +8,8 @@ using namespace std;
 int main(){
     // Phần khai báo biến
     string Ten_mon[] = {"Ga ran", "Combo Ga", "Hamburger", "Combo Hamburger", "Coke"};
-    long long gia_tien[]   = {   305  ,   360     ,   210     ,      260        ,   20};
-    float phu_thu[] =    { 0.01, 0.15, 0.05, 0.1, 0};
+    long long gia_tien[] = {305, 360 , 210, 260, 20};
+    float phu_thu[] = {0.01, 0.15, 0.05, 0.1, 0};
     map <int, int> so_mon;
     int so_luong = 0;
     int choice;
