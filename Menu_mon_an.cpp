@@ -38,6 +38,8 @@ int main(){
         if (choice == 0) {
             break;
         }
+
+        // Số lượng của từng món 
         cout << "Bao nhieu phan: ";
         cin >> so_luong;
 
