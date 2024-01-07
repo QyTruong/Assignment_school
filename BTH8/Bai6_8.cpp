@@ -10,40 +10,22 @@ void nhap(int arr[], int arrSize){
     }
 }
 
-// Xuất mảng
-void xuat(const int arr[], int arrSize){
-    for (int i = 1; i <= arrSize; i++){
-        cout << arr[i];
-        if (i < arrSize){
-            cout << ", ";
-        }
-    }
-}
-
 // Tìm phần tử trong mảng
 bool tim(const int arr[], int arrSize, int x){
-    int tmp;
     for (int i = 0; i <= arrSize; i++){
         if (arr[i] == x) {
-            tmp = i;
             return true;
         }
     }
-    if (tmp >= 0){
-        return true;
-    }
-    else {
-        return false;
-    }
+    return false;
 }
 
 // Đảo ngược thứ tự mảng
 void daonguoc(int arr[], int arrSize){
-    for (int i = 0; i < arrSize; i++){
+    for (int i = 0; i < arrSize/2; i++){
         int tmp = arr[i];
-        arr[i] = arr[arrSize];
-        arr[arrSize] = tmp;
-        arrSize--;
+        arr[i] = arr[arrSize-1-i];
+        arr[arrSize-1-i] = tmp;
     }
 }
 
@@ -55,6 +37,20 @@ void xoa(int arr[], int& arrSize, int p){
     arrSize--;
 }
 
+// Xuất mảng
+void xuat(int arr[], int arrSize){
+    for (int i = 0; i < arrSize; i++){
+        cout << arr[i];
+        if (i < arrSize-1){
+            cout << ", ";
+        }
+        else {
+            cout << ".";
+        }
+    }
+}
+
+
 int main(){
     int x,s;
     int n;
@@ -65,7 +61,7 @@ int main(){
 	        cout << "Vui long nhap lai!" << endl;
 	    } 
     } while (n <= 0);
-    int a[n];
+    int a[20];
     nhap(a,n);
     daonguoc(a,n); 
     xuat(a,n); cout << endl; 
@@ -73,6 +69,6 @@ int main(){
     if (tim(a,n,x)) cout << "Tim thay" << endl;
     else cout << "Khong tim thay" << endl;
     cout << "Muon xoa so o vi tri thu may: "; cin >> s;
-    xoa(a,n,s+1);
+    xoa(a,n,s);
     xuat(a,n);
 }
