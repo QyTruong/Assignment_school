@@ -90,7 +90,7 @@ int main(){
     int a[n][MAXCOL];
     int xA, yA, xB, yB;
     Mat_Xoan_Oc(a,n,n);
-    findSpecialPoints(a,n,n,xA,xB,yA,yB);
+    findSpecialPoints(a,n,n,xA,yA,xB,yB);
     cout << "Toa do diem A " << "["<< xA << "; " << yA << "]"<< endl;
     cout << "Toa do diem B " << "["<< xB << "; " << yB << "]"<< endl;
     xuat(a,n);
