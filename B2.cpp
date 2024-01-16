@@ -30,6 +30,7 @@ long PhamVi(const long a[], long n, long min, long max){
     }
     if (cnt == 0) return 0;
     else {
+        cout << "Co " << cnt << " phong hop le!\n";
         cout << "Nhung phong hop le!";
         cout << "\nPhong\tSL Cho Ngoi\n";
         for (int i = 0; i < n; i++){
@@ -88,6 +89,7 @@ int main(){
                 cin >> y;
                 if (x>y) cout << "Vui long nhap lai!\n";
             } while (x>y);
+            
             if (!PhamVi(a,n,x,y)) cout << "Khong co phong hop le!\n";  
             break;
         }
