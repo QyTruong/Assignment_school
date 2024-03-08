@@ -3,9 +3,9 @@
 using namespace std;
 
 long arr1[SIZE][SIZE], arr2[SIZE][SIZE], arrTong[SIZE][SIZE], arrTich[SIZE][SIZE];
-// Đề chỉ yêu câu đúng 2 ma trận !!!
 void nhap(int n){
     int t = 1;
+    // t < 3 vì đề bài chỉ yêu cầu xử lý trên 2 ma trận !!
     while (t < 3){
         cout << "Ma tran thu " << t << ": " << endl;
         for (int i = 0; i < n; i++){
