@@ -3,6 +3,7 @@
 using namespace std;
 
 long arr1[SIZE][SIZE], arr2[SIZE][SIZE], arrTong[SIZE][SIZE], arrTich[SIZE][SIZE];
+// Đề chỉ yêu câu đúng 2 ma trận !!!
 void nhap(int n){
     int t = 1;
     while (t < 3){
