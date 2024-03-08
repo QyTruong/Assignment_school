@@ -62,9 +62,16 @@ void xuat(int n){
 }
 
 int main(){
-    nhap(2);
-    tong_mt(2);
-    tich_mt(2);
-    xuat(2);
+    int n;
+    do {
+        cout << "Ban muon ma tran cap bao nhieu: ";
+        cin >> n;
+        if (n <= 0 || n > SIZE)
+            cout << "Again" << endl;
+    } while (n <= 0 || n > SIZE);
+    nhap(n);
+    tong_mt(n);
+    tich_mt(n);
+    xuat(n);
     return 0;
 }
