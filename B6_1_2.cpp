@@ -4,19 +4,19 @@ using namespace std;
 
 long arr1[SIZE][SIZE], arr2[SIZE][SIZE], arrTong[SIZE][SIZE], arrTich[SIZE][SIZE];
 void nhap(int n){
-    int t = 1;
+    int t = 2;
     // t < 3 vì đề bài chỉ yêu cầu xử lý trên 2 ma trận !!
-    while (t < 3){
+    while (t){
         cout << "Ma tran thu " << t << ": " << endl;
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
-                if (t == 1)
+                if (t == 2)
                     cin >> arr1[i][j];
                 else
                     cin >> arr2[i][j];
             }
         }
-        t++;
+        t--;
     }
 }
 
@@ -43,22 +43,22 @@ void tich_mt(int n){
 }
 
 void xuat(int n){
-    int t = 1;
-    while (t < 3){
+    int t = 2;
+    while (t){
         cout << "----------" << endl;
         cout << "Ma tran ";
-        if (t == 1) cout << "tong la: " << endl;
+        if (t == 2) cout << "tong la: " << endl;
         else cout << "tich la: " << endl;
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
-                if (t == 1)
+                if (t == 2)
                     cout << arrTong[i][j] << " ";
                 else
                     cout << arrTich[i][j] << " ";
             }
             cout << endl;
         }
-        t++;
+        t--;
     }
 }
 
