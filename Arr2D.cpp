@@ -12,11 +12,19 @@ void nhap(int a[MAXROW][MAXCOL], int r, int c);
 
 void khoitao_rand(int a[MAXROW][MAXCOL], int r, int c);
 
-void khoitao_rand_2(int a[MAXROW][MAXCOL], int r, int c);
+void khoitao_rand_2(int a[MAXROW][MAXCOL], int &r, int &c);
 
 long tongHang(int a[MAXROW][MAXCOL], int r, int c, int vtHang);
 
 long tongCot(int a[MAXROW][MAXCOL], int r, int c, int vtCot);
+
+int tong(int a, int b);
+
+int hieu(int a, int b);
+
+int tich(int a, int b);
+
+void xuly_2mt(int a[MAXROW][MAXCOL], int b[MAXROW][MAXCOL], int res[MAXROW][MAXCOL], int r, int c, int func(int a, int b));
 
 void xuat(int a[MAXROW][MAXCOL], int r, int c); 
 
@@ -96,11 +104,35 @@ int main(){
 		}
 		case 6: {
 			cout << "Chuong trinh tinh tong 2 ma tran\n";
-			//nhapHangCot(hang, cot);
-			khoitao_rand_2(a, hang, cot);
-			//nhapHangCot(hang, cot);
-			khoitao_rand_2(b, hang, cot);
-
+		            cout << "Ma tran 1: \n";
+					khoitao_rand_2(a, hang, cot);
+		            cout << "Ma tran 2: \n";
+					khoitao_rand_2(b, hang, cot);
+		            xuat(a, hang , cot);
+		            xuat(b, hang, cot);
+		            xuly_2mt(a,b,c,hang, cot, tong);
+			break;
+		}
+	        case 7: {
+			cout << "Chuong trinh tinh hieu 2 ma tran\n";
+		            cout << "Ma tran 1: \n";
+					khoitao_rand_2(a, hang, cot);
+		            cout << "Ma tran 2: \n";
+					khoitao_rand_2(b, hang, cot);
+		            xuat(a, hang , cot);
+		            xuat(b, hang, cot);
+		            xuly_2mt(a,b,c,hang, cot, hieu);
+			break;
+		}
+	        case 8: {
+			cout << "Chuong trinh tinh tich 2 ma tran\n";
+		            cout << "Ma tran 1: \n";
+					khoitao_rand_2(a, hang, cot);
+		            cout << "Ma tran 2: \n";
+					khoitao_rand_2(b, hang, cot);
+		            xuat(a, hang , cot);
+		            xuat(b, hang, cot);
+		            xuly_2mt(a,b,c,hang, cot, tich);
 			break;
 		}
 		default:
@@ -143,12 +175,12 @@ void khoitao_rand(int a[MAXROW][MAXCOL], int r, int c) {
 	}
 }
 
-void khoitao_rand_2(int a[MAXROW][MAXCOL], int r, int c) {
+void khoitao_rand_2(int arr[MAXROW][MAXCOL], int &r, int &c) {
 	nhapHangCot(r, c);
 	srand((int)time(NULL));
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++) {
-			a[i][j] = rand() % 101;
+			arr[i][j] = rand() % 101;
 		}
 	}
 }
@@ -179,4 +211,23 @@ void xuat(int a[MAXROW][MAXCOL], int r, int c) {
 	}
 }
 
+int tong(int a, int b){
+    return a+b;
+}
 
+int hieu(int a, int b){
+    return a-b;
+}
+
+int tich(int a, int b){
+    return a*b;
+}
+
+void xuly_2mt(int a[MAXROW][MAXCOL], int b[MAXROW][MAXCOL], int res[MAXROW][MAXCOL], int r, int c, int func(int a, int b)){
+    for (int i = 0; i < r; i++){
+        for (int j = 0; j < c; j++){
+            res[i][j] = func(a[i][j], b[i][j]);
+        }
+    }
+    xuat(res, r, c);
+}
