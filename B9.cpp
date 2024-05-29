@@ -64,7 +64,7 @@ void Diem::hienthi() {
 }
 
 double Diem::tinhkhoanhcach(Diem d2) {
-	return sqrt(pow(x - d2.getHoanhdo(), 2) - pow(y - d2.getTungdo(), 2));
+	return sqrt(pow(x - d2.getHoanhdo(), 2) + pow(y - d2.getTungdo(), 2));
 }
 
 class DuongTron{
