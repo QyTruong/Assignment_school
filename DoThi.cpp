@@ -7,6 +7,10 @@
 
 using namespace std;
 
+struct Edge {
+	int u, v, w;
+};
+
 void menuInput() {
 	cout << "1. Auto\n"
 		<< "2. Manual\n";
@@ -16,7 +20,11 @@ void menuTest() {
 	cout << "0. Thoat\n"
 		<< "1. Tim dinh\n"
 		<< "2. Tim duong di tu 1 dinh -> dinh khac\n"
-		<< "3. Do thi lien thong khong ?\n";
+		<< "3. Do thi lien thong khong ?\n"
+		<< "4. Kruskal\n"
+		<< "5. Prim\n"
+		<< "6. Dijkstra\n"
+		<< "7. Bellman-Ford\n";
 }
 
 vector<int> vis;
@@ -40,6 +48,7 @@ void output(int start, int goal) {
 	cout << goal;
 }
 
+// DFS
 bool DFS(vector<vector<int>> a, int start, int goal, int n, int op, int isCount) {
 	vis.resize(n + 1, 0);
 	previous.resize(n + 1, -1);
@@ -124,6 +133,33 @@ bool BFS(vector<vector<int>> a, int start, int goal, int n, int op) {
 	return false;
 }
 
+void make_set(vector<int> parent, int n) {
+	for (int i = 1; i <= n; i++) {
+		parent[i] = i;
+	}
+}
+
+int findParent(vector<int> parent, int v) {
+	if (v == parent[v])
+		return v;
+	return parent[v] = findParent(parent, parent[v]);
+}
+
+bool unionVertex(vector<int> parent, int u, int v) {
+	u = findParent(parent, u);
+	v = findParent(parent, v);
+	if (u == v)
+		return false;
+	parent[u] = v;
+	return true;
+}
+
+int kruskal(vector<Edge>& edges, int n, int m, vector<int> parent) {
+	int d = 0;
+	vector<Edge> mst;
+	sort(edges.begin(), edges.end(), [](Edge a, Edge b) {return a.w < b.w; });
+}
+
 void showMatrix(vector<vector<int>> a) {
 
 	for (int i = 1; i < a.size(); i++) {
@@ -146,6 +182,8 @@ void showAdj(vector<vector<int>> a) {
 }
 
 
+
+
 int main() {
 	int choice;
 	do {
@@ -156,8 +194,9 @@ int main() {
 		vector<pair<int, int>> edges;
 		vector<vector<int>> adj;
 		vector<vector<int>> matrix;
+		
+		vector<Edge> edges1;
 		int n, m;
-
 		int op;
 		menuInput();
 		do {
@@ -211,16 +250,23 @@ int main() {
 				for (int i = 0; i < m; i++) {
 					int u;
 					int v;
+					int w;
 					do {
 						do {
 							u = (rand() % n) + 1;
 							v = (rand() % n) + 1;
+							w = (rand() % 100) + 1;
 						} while (u == v);
 					} while (Ivis[u][v] == true);
 					Ivis[u][v] = true;
 					edges.push_back({ u, v });
+					edges1.push_back({ u,v,w });
 				}
-
+				cout << "\tDANH SACH CANH CO TRONG SO\n";
+				for (auto e : edges1) {
+					cout << e.u << " - " << e.v << " - " << e.w << endl;
+				}
+				cout << "\tDANH SACH CANH KHONG CO TRONG SO\n";
 				for (auto e : edges) {
 					cout << e.first << " - " << e.second << endl;
 				}
@@ -258,12 +304,18 @@ int main() {
 
 			// Manual
 			else if (select == 2) {
+				for (int i = 0; i < m; i++) {
+					int u, v, w;
+					cin >> u >> v >> w;
+					edges.push_back({ u, v });
+					edges1.push_back({ u,v,w });
+				}
 
 				// Vo huong
 				if (op == 1) {
 					for (int i = 0; i < m; i++) {
-						int u, v;
-						cin >> u >> v;
+						int u = edges[i].first;
+						int v = edges[i].second;
 						matrix[u][v] = 1;
 						matrix[v][u] = 1;
 					}
@@ -272,17 +324,13 @@ int main() {
 				// Co huong
 				else if (op == 2) {
 					for (int i = 0; i < m; i++) {
-						int u, v;
-						cin >> u >> v;
+						int u = edges[i].first;
+						int v = edges[i].second;
 						if (u != v)
 							adj[u].push_back(v);
 					}
 				}
 			}
-
-
-
-
 		} while (select != 1 && select != 2);
 
 		int showList;
@@ -322,9 +370,9 @@ int main() {
 				int v; cin >> v;
 				if (op == 1) {
 					if (DFS(matrix, 1, v, n, op, 0)) {
-						cout << "Dinh " << v << " co ton tai trong do thi\n";
+						cout << "\nDinh " << v << " co ton tai trong do thi\n";
 					}
-					else cout << "Khong tim thay " << v << " trong do thi\n";
+					else cout << "\nKhong tim thay " << v << " trong do thi\n";
 				}
 				else {
 					if (DFS(adj, 1, v, n, op, 0)) {
@@ -398,13 +446,28 @@ int main() {
 
 				break;
 			}
+			case 4: {
+				vector<Edge> kruskal = edges1;
+
+			}
+			case 5: {
+				vector<Edge> prim = edges1;
+			}
+			case 6: {
+				vector<Edge> dijsktra = edges1;
+			
+			}
+			case 7: {
+				vector<Edge> bf = edges1;
+
+			}
 			default:
 				cout << "Khong hop le, vui long nhap lai!\n";
 				break;
 			}
 			system("pause");
 		} while (choice != 0);
-		
+
 		int repeat;
 		do {
 			cout << "Ban co muon khoi tao lai mang de tiep tuc thuc hien thao tac khong?: ";
