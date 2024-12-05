@@ -7,13 +7,13 @@
 
 using namespace std;
 
-void menuInput(){
+void menuInput() {
 	cout << "1. Auto\n"
 		<< "2. Manual\n";
 }
 
 void menuTest() {
-	cout << "0. Thoat\n" 
+	cout << "0. Thoat\n"
 		<< "1. Tim dinh\n"
 		<< "2. Tim duong di tu 1 dinh -> dinh khac\n"
 		<< "3. Do thi lien thong khong ?\n";
@@ -23,55 +23,55 @@ vector<int> vis;
 vector<int> previous;
 int dem = 0;
 
-void output(int start, int goal){
-    stack<int> st;
+void output(int start, int goal) {
+	stack<int> st;
 
-    int idx = previous[goal];
-    while (idx != start){
-        st.push(idx);
-        idx = previous[idx];
-    }
-    st.push(start);
+	int idx = previous[goal];
+	while (idx != start) {
+		st.push(idx);
+		idx = previous[idx];
+	}
+	st.push(start);
 
-    while (!st.empty()){
-        cout << st.top() << " -> ";
-        st.pop();
-    }
-    cout << goal;
+	while (!st.empty()) {
+		cout << st.top() << " -> ";
+		st.pop();
+	}
+	cout << goal;
 }
 
-bool DFS(vector<vector<int>> a, int start, int goal, int n, int op, int isCount){
-    vis.resize(n+1, 0);
-    previous.resize(n+1, -1);
-    stack<int> s;
+bool DFS(vector<vector<int>> a, int start, int goal, int n, int op, int isCount) {
+	vis.resize(n + 1, 0);
+	previous.resize(n + 1, -1);
+	stack<int> s;
 	dem++;
-    s.push(start);
-    vis[start] = 1;
+	s.push(start);
+	vis[start] = 1;
 
-    while (!s.empty()){
-        int r = s.top(); s.pop();
-        vis[r] = 1;
+	while (!s.empty()) {
+		int r = s.top(); s.pop();
+		vis[r] = 1;
 
-        if (isCount == 0){
-			if (r == goal){
+		if (isCount == 0) {
+			if (r == goal) {
 				output(start, goal);
 				return true;
 			}
 		}
-		if (op == 1){
-			for (int i = 1; i <= n; i++){
-				if (!vis[i] && a[r][i]){
+		if (op == 1) {
+			for (int i = 1; i <= n; i++) {
+				if (!vis[i] && a[r][i]) {
 					dem++;
 					s.push(i);
 					vis[i] = -1;
-					previous[i] = r; 
+					previous[i] = r;
 				}
 			}
 			if (dem == n) return true;
 		}
 		else {
-			for (auto i : a[r]){
-				if (!vis[i]){
+			for (auto i : a[r]) {
+				if (!vis[i]) {
 					vis[i] = -1;
 					dem++;
 					s.push(i);
@@ -79,53 +79,53 @@ bool DFS(vector<vector<int>> a, int start, int goal, int n, int op, int isCount)
 				}
 			}
 		}
-        
-    }
+
+	}
 	return false;
 }
 
 // BFS
-bool BFS(vector<vector<int>> a, int start, int goal, int n, int op){
-    vis.resize(n+1, 0);
-    previous.resize(n+1, -1);
-    queue<int> q;
-    q.push(start);
-    vis[start] = 1;
+bool BFS(vector<vector<int>> a, int start, int goal, int n, int op) {
+	vis.resize(n + 1, 0);
+	previous.resize(n + 1, -1);
+	queue<int> q;
+	q.push(start);
+	vis[start] = 1;
 
-    while (!q.empty()){
-        int r = q.front(); q.pop();
-        vis[r] = 1;
+	while (!q.empty()) {
+		int r = q.front(); q.pop();
+		vis[r] = 1;
 
-        if (r == goal){
+		if (r == goal) {
 			output(start, goal);
-			return true;   
-        }
-        else {
-            if (op == 1){
-				for (int i = 1; i <= n; i++){
-					if (!vis[i] && a[r][i]){
+			return true;
+		}
+		else {
+			if (op == 1) {
+				for (int i = 1; i <= n; i++) {
+					if (!vis[i] && a[r][i]) {
 						q.push(i);
 						vis[i] = -1;
-						previous[i] = r; 
+						previous[i] = r;
 					}
 				}
 			}
 			else {
-				for (auto i : a[r]){
-					if (!vis[i]){
+				for (auto i : a[r]) {
+					if (!vis[i]) {
 						vis[i] = -1;
 						q.push(i);
 						previous[i] = r;
 					}
 				}
 			}
-        }
-    }
+		}
+	}
 	return false;
 }
 
 void showMatrix(vector<vector<int>> a) {
-	
+
 	for (int i = 1; i < a.size(); i++) {
 		for (int j = 1; j < a.size(); j++) {
 			cout << a[i][j] << "\t";
@@ -144,6 +144,7 @@ void showAdj(vector<vector<int>> a) {
 		cout << endl;
 	}
 }
+
 
 int main() {
 	int choice;
@@ -166,59 +167,60 @@ int main() {
 				cout << "Khong hop le, vui long nhap lai!\n";
 			}
 
-            // Lua chon co huong hoac vo huong
-				do {
-					cout << "Ban muon do thi vo huong hay co huong:\n";
-					cout << "1. Vo huong\n"
-						<< "2. Co huong\n";
-					cout << "Lua chon cua ban la: ";
-					cin >> op;
-					if (op != 1 && op != 2) {
-						cout << "Khong hop le, vui long thu lai!\n";
-					}
-				} while (op != 1 && op != 2);
+			// Lua chon co huong hoac vo huong
+			do {
+				cout << "Ban muon do thi vo huong hay co huong:\n";
+				cout << "1. Vo huong\n"
+					<< "2. Co huong\n";
+				cout << "Lua chon cua ban la: ";
+				cin >> op;
+				if (op != 1 && op != 2) {
+					cout << "Khong hop le, vui long thu lai!\n";
+				}
+			} while (op != 1 && op != 2);
 
-				if (op == 1){
-					do {
-						cout << "Nhap so dinh: "; cin >> n;
-						cout << "Nhap so canh: "; cin >> m;
-						if (n < 2 || m < 1 || m > n*(n-1)/2){
-							cout << "Dau vao khong hop le, vui long nhap lai!\n";
-						}
-					} while (n < 2 || m < 1 || m > n*(n-1)/2);
-				}
-				else {
-						do {
-						cout << "Nhap so dinh: "; cin >> n;
-						cout << "Nhap so canh: "; cin >> m;
-						if (n < 2 || m < 1 || m > n*(n-1)){
-							cout << "Dau vao khong hop le, vui long nhap lai!\n";
-						}
-					} while (n < 2 || m < 1 || m > n*(n-1));
-				}
-			
+			// Khoi tao so dinh va so canh
+			if (op == 1) {
+				do {
+					cout << "Nhap so dinh: "; cin >> n;
+					cout << "Nhap so canh: "; cin >> m;
+					if (n < 2 || m < 1 || m > n*(n - 1) / 2) {
+						cout << "Dau vao khong hop le, vui long nhap lai!\n";
+					}
+				} while (n < 2 || m < 1 || m > n*(n - 1) / 2);
+			}
+			else {
+				do {
+					cout << "Nhap so dinh: "; cin >> n;
+					cout << "Nhap so canh: "; cin >> m;
+					if (n < 2 || m < 1 || m > n*(n - 1)) {
+						cout << "Dau vao khong hop le, vui long nhap lai!\n";
+					}
+				} while (n < 2 || m < 1 || m > n*(n - 1));
+			}
+
 
 
 			// Khoi so dinh cho danh sach ke va ma tran ke
 			adj.resize(n + 1);
 			matrix.resize(n + 1, vector<int>(n + 1, 0));
-			
+
 			// Automatic
 			if (select == 1) {
-				vector<vector<bool>> Ivis(n+1, vector<bool> (n+1, false));
+				vector<vector<bool>> Ivis(n + 1, vector<bool>(n + 1, false));
 				for (int i = 0; i < m; i++) {
 					int u;
 					int v;
 					do {
 						do {
-							u = (rand()%n) + 1;
-							v = (rand()%n) + 1;
+							u = (rand() % n) + 1;
+							v = (rand() % n) + 1;
 						} while (u == v);
 					} while (Ivis[u][v] == true);
 					Ivis[u][v] = true;
-					edges.push_back({u, v});
+					edges.push_back({ u, v });
 				}
-				
+
 				for (auto e : edges) {
 					cout << e.first << " - " << e.second << endl;
 				}
@@ -239,7 +241,7 @@ int main() {
 					}
 				}
 
-				
+
 
 				// Co huong
 				else if (op == 2) {
@@ -278,8 +280,8 @@ int main() {
 				}
 			}
 
-			
-			
+
+
 
 		} while (select != 1 && select != 2);
 
@@ -301,107 +303,126 @@ int main() {
 			}
 			if (showList == 1) break;
 		} while (showList != 1 && showList != 0);
-		
-		
-		
-		cout << "\n";
-		menuTest();
-		cout << "Hay nhap lua chon cua ban: ";
-		cin >> choice;
-		switch (choice)
-		{
-		case 0: {
-			cout << "Cam on vi da su dung chuong trinh!\n";
-			break;
-		}
-		case 1: {
-			cout << "\tTIM DINH TON TAI\n";
-			cout << "Ban muon tim dinh nao?: ";
-			int v; cin >> v;
-			if (op == 1){
-				if (DFS(matrix, 1, v, n, op, 0)){
-				cout << "Dinh " << v << " co ton tai trong do thi\n";
-				}
-				else cout << "Khong tim thay " << v << " trong do thi\n";
-			}
-			else {
-				if (DFS(adj, 1, v, n, op, 0)){
-				cout << "Dinh " << v << " co ton tai trong do thi\n";
-				}
-				else cout << "Khong tim thay " << v << " trong do thi\n";
-			}
-			break;
-		}
-		case 2: {
-			cout << "\tTIM DUONG TU 1 DINH DEN 1 DINH KHAC\n";
-			int u, v;
-			cout << "Dinh bat dau: "; cin >> u;
-			cout << "Dinh dich: "; cin >> v;
-			printf("Doan duong tu %d den %d: ", u, v);
-			if (op == 1){
-				if (BFS(matrix, 1, v, n, op)){
-					BFS(matrix, u, v, n, op);
-					cout << endl;
-				}
-				else cout << "Khong tim thay doan duong nay trong do thi\n";
-			}
-			else {
-				if (BFS(adj, u, v, n, op)){
-					BFS(adj, u, v, n, op);
-					cout << endl;
-				}
-				else cout << "Khong tim thay doan duong nay trong do thi\n";
-			}
 
-			break;
-		}
-		case 3: {
-			cout << "\tKIEM TRA DO THI LIEN THONG\n";
-			int flag = 0;
-			if (op == 1){
-				dem = 0;
-				for (int i = 1; i <= n; i++){
-					for (int j = 1; j <= n; j++){
-						if (matrix[i][j]){
-							if (DFS(matrix, i, n, n, op, 1)){
+
+
+		do {
+			cout << "\n";
+			menuTest();
+			cout << "Hay nhap lua chon cua ban: ";
+			cin >> choice;
+			switch (choice)
+			{
+			case 0: {
+				break;
+			}
+			case 1: {
+				cout << "\tTIM DINH TON TAI\n";
+				cout << "Ban muon tim dinh nao?: ";
+				int v; cin >> v;
+				if (op == 1) {
+					if (DFS(matrix, 1, v, n, op, 0)) {
+						cout << "Dinh " << v << " co ton tai trong do thi\n";
+					}
+					else cout << "Khong tim thay " << v << " trong do thi\n";
+				}
+				else {
+					if (DFS(adj, 1, v, n, op, 0)) {
+						cout << "Dinh " << v << " co ton tai trong do thi\n";
+					}
+					else cout << "Khong tim thay " << v << " trong do thi\n";
+				}
+				break;
+			}
+			case 2: {
+				cout << "\tTIM DUONG TU 1 DINH DEN 1 DINH KHAC\n";
+				int u, v;
+				cout << "Dinh bat dau: "; cin >> u;
+				cout << "Dinh dich: "; cin >> v;
+				printf("Doan duong tu %d den %d: ", u, v);
+				if (op == 1) {
+					if (BFS(matrix, 1, v, n, op)) {
+						BFS(matrix, u, v, n, op);
+						cout << endl;
+					}
+					else cout << "Khong tim thay doan duong nay trong do thi\n";
+				}
+				else {
+					if (BFS(adj, u, v, n, op)) {
+						BFS(adj, u, v, n, op);
+						cout << endl;
+					}
+					else cout << "Khong tim thay doan duong nay trong do thi\n";
+				}
+
+				break;
+			}
+			case 3: {
+				cout << "\tKIEM TRA DO THI LIEN THONG\n";
+				int flag = 0;
+				if (op == 1) {
+					dem = 0;
+					for (int i = 1; i <= n; i++) {
+						for (int j = 1; j <= n; j++) {
+							if (matrix[i][j]) {
+								if (DFS(matrix, i, n, n, op, 1)) {
+									cout << "Do thi lien thong!!\n";
+									flag = 1;
+									break;
+								}
+								else {
+									cout << "Do thi khong lien thong!!\n";
+									flag = 1;
+									break;
+								}
+							}
+						}
+						if (flag == 1) break;
+					}
+					cout << dem;
+				}
+				else {
+					for (int i = 1; i <= n; i++) {
+						if (!adj[i].empty()) {
+							if (DFS(adj, i, n, n, op, 1)) {
 								cout << "Do thi lien thong!!\n";
-								flag = 1;
 								break;
 							}
 							else {
 								cout << "Do thi khong lien thong!!\n";
-								flag = 1;
 								break;
 							}
 						}
 					}
-					if (flag == 1) break;
 				}
-				cout << dem;
-			}
-			else {
-				for (int i = 1; i <= n; i++){
-					if (!adj[i].empty()){
-						if (DFS(adj, i, n, n, op, 1)){
-							cout << "Do thi lien thong!!\n";
-							break;
-						}
-						else {
-							cout << "Do thi khong lien thong!!\n";
-							break;
-						}
-					}
-				}
-			}
 
-			break;
-		}
-		default:
-			cout << "Khong hop le, vui long nhap lai!\n";
-			break;
-		}
+				break;
+			}
+			default:
+				cout << "Khong hop le, vui long nhap lai!\n";
+				break;
+			}
+			system("pause");
+		} while (choice != 0);
+		
+		int repeat;
+		do {
+			cout << "Ban co muon khoi tao lai mang de tiep tuc thuc hien thao tac khong?: ";
+			cin >> repeat;
+			if (repeat == 0) {
+				break;
+			}
+			else if (repeat == 1) {
+				choice = 1;
+				break;
+			}
+			if (repeat != 0 || repeat != 1)
+				cout << "Khong hop le, vui long nhap lai!\n";
+		} while (repeat != 0 || repeat != 1);
 
-		system("pause");
+		if (repeat == 0) {
+			cout << "Cam on vi da su dung chuong trinh!\n";
+		}
 	} while (choice != 0);
 
 	return 0;
